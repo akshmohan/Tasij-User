@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:yoori_ecommerce/src/controllers/profile_content_controller.dart';
 import 'package:yoori_ecommerce/src/servers/repository.dart';
 import 'package:yoori_ecommerce/src/utils/app_tags.dart';
@@ -86,63 +87,70 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
+    log(widget.userDataModel.toJson().toString(), name: "INSIDE UPDATE");
     Size size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      appBar: isMobile(context)
-          ? AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              leading: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
-                ),
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pop(context, 'updated');
+        return false;
+      },
+      child: Scaffold(
+        appBar: isMobile(context)
+            ? AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                leading: IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
+                  ),
 
-                onPressed: () {
-                  Get.back();
-                }, // null disables the button
-              ),
-              centerTitle: true,
-              title: Text(
-                AppTags.editProfile.tr,
-                style: AppThemeData.headerTextStyle_16,
-              ),
-            )
-          : AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              toolbarHeight: 60.h,
-              leadingWidth: 40.w,
-              leading: IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
-                  size: 25.r,
+                  onPressed: () {
+                    Get.back();
+                  }, // null disables the button
                 ),
+                centerTitle: true,
+                title: Text(
+                  AppTags.editProfile.tr,
+                  style: AppThemeData.headerTextStyle_16,
+                ),
+              )
+            : AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                toolbarHeight: 60.h,
+                leadingWidth: 40.w,
+                leading: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
+                    size: 25.r,
+                  ),
 
-                onPressed: () {
-                  Get.back();
-                }, // null disables the button
+                  onPressed: () {
+                    Get.back();
+                  }, // null disables the button
+                ),
+                centerTitle: true,
+                title: Text(
+                  AppTags.editProfile.tr,
+                  style: AppThemeData.headerTextStyle_14,
+                ),
               ),
-              centerTitle: true,
-              title: Text(
-                AppTags.editProfile.tr,
-                style: AppThemeData.headerTextStyle_14,
-              ),
-            ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 0.w),
-        child: SizedBox(
-            width: size.width,
-            height: size.height,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                _ui(),
-                isLoading ? const LoaderWidget() : const SizedBox(),
-              ],
-            )),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 0.w),
+          child: SizedBox(
+              width: size.width,
+              height: size.height,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  _ui(),
+                  isLoading ? const LoaderWidget() : const SizedBox(),
+                ],
+              )),
+        ),
       ),
     );
   }
@@ -571,6 +579,10 @@ class _EditProfileState extends State<EditProfile> {
             updatedUserData['date_of_birth']!;
         isLoading = false;
       });
+      final profileController = Get.find<ProfileContentController>();
+      profileController.getProfileData(); // Fetch new data
+      profileController.getUserData(); // Update user data
+      profileController.update();
 
       Get.snackbar(
         "Success",

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -47,6 +49,7 @@ class _ProfileContentState extends State<ProfileContent> {
 
   Widget _profileWithLogin(UserDataModel userDataModel) {
     Size size = MediaQuery.of(context).size;
+    log(userDataModel.toJson().toString());
     return Scaffold(
       body: SizedBox(
         width: size.width,
@@ -60,153 +63,173 @@ class _ProfileContentState extends State<ProfileContent> {
   }
 
   //Main ui
-  Widget _mainUi(UserDataModel userDataModel) => ListView(
-        children: [
-          SizedBox(
-            height: isMobile(context) ? 20.h : 25.h,
-          ),
-          Container(
-            height: 160.h,
-            width: MediaQuery.of(context).size.width,
-            color: const Color(0xffF8F8F8),
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 10.w),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  //SizedBox(height: 5,),
-                  Container(
-                    width: isMobile(context) ? 74.w : 50.w,
-                    height: 74.h,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 0.w,
-                          color: Theme.of(context).scaffoldBackgroundColor),
-                      boxShadow: [
-                        BoxShadow(
-                            spreadRadius: 2.r,
-                            blurRadius: 10.r,
-                            color: Colors.black.withOpacity(0.1),
-                            offset: const Offset(0, 5))
-                      ],
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                          userDataModel.data!.image!.toString(),
+  Widget _mainUi(UserDataModel userDataModel) => Obx(() {
+        return ListView(
+          children: [
+            SizedBox(
+              height: isMobile(context) ? 20.h : 25.h,
+            ),
+            Container(
+              height: 160.h,
+              width: MediaQuery.of(context).size.width,
+              color: const Color(0xffF8F8F8),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 10.w),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    //SizedBox(height: 5,),
+                    Container(
+                      width: isMobile(context) ? 74.w : 50.w,
+                      height: 74.h,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            width: 0.w,
+                            color: Theme.of(context).scaffoldBackgroundColor),
+                        boxShadow: [
+                          BoxShadow(
+                              spreadRadius: 2.r,
+                              blurRadius: 10.r,
+                              color: Colors.black.withOpacity(0.1),
+                              offset: const Offset(0, 5))
+                        ],
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                            _profileContentController
+                                .profileDataModel.value.data!.image!
+                                .toString(),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Text(
-                    "${userDataModel.data!.firstName!.toString()} ${userDataModel.data!.lastName!.toString()}",
-                    style: isMobile(context)
-                        ? AppThemeData.headerTextStyle_16
-                        : AppThemeData.headerTextStyle_14,
-                  ),
-                ],
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    Text(
+                      "${_profileContentController.profileDataModel.value.data!.firstName!.toString()} ${_profileContentController.profileDataModel.value.data!.lastName!.toString()}",
+                      style: isMobile(context)
+                          ? AppThemeData.headerTextStyle_16
+                          : AppThemeData.headerTextStyle_14,
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          userDataModel.data!.email == "" && userDataModel.data!.phone == ""
-              ? const SizedBox()
-              : Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  child: Container(
-                    transform: Matrix4.translationValues(0.0, -20.0, 0.0),
-                    alignment: Alignment.bottomCenter,
-                    decoration: BoxDecoration(
-                      color: AppThemeData.lightBackgroundColor,
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      boxShadow: [
-                        BoxShadow(
-                          color:
-                              AppThemeData.headlineTextColor.withOpacity(0.1),
-                          spreadRadius: 0.r,
-                          blurRadius: 30.r,
-                          offset:
-                              const Offset(0, 15), // changes position of shadow
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(20.r),
-                      child: Column(
-                        children: [
-                          userDataModel.data!.phone == ""
-                              ? const SizedBox()
-                              : Row(
-                                  children: [
-                                    SizedBox(
-                                      height: 20.h,
-                                      width: 20.w,
-                                      child: SvgPicture.asset(
-                                        "assets/icons/phone_color.svg",
-                                      ),
-                                    ),
-                                    SizedBox(width: 10.w),
-                                    Text(
-                                      userDataModel.data!.phone!.toString(),
-                                      style: isMobile(context)
-                                          ? AppThemeData.titleTextStyle_14
-                                          : AppThemeData.titleTextStyle_11Tab,
-                                    ),
-                                  ],
-                                ),
-                          SizedBox(
-                            height:
-                                userDataModel.data!.phone == "" ? 0.h : 10.h,
+            _profileContentController.profileDataModel.value.data!.email ==
+                        "" &&
+                    _profileContentController
+                            .profileDataModel.value.data!.phone ==
+                        ""
+                ? const SizedBox()
+                : Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15.w),
+                    child: Container(
+                      transform: Matrix4.translationValues(0.0, -20.0, 0.0),
+                      alignment: Alignment.bottomCenter,
+                      decoration: BoxDecoration(
+                        color: AppThemeData.lightBackgroundColor,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                        boxShadow: [
+                          BoxShadow(
+                            color:
+                                AppThemeData.headlineTextColor.withOpacity(0.1),
+                            spreadRadius: 0.r,
+                            blurRadius: 30.r,
+                            offset: const Offset(
+                                0, 15), // changes position of shadow
                           ),
-                          userDataModel.data!.email == ""
-                              ? const SizedBox()
-                              : Row(
-                                  children: [
-                                    SizedBox(
+                        ],
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(20.r),
+                        child: Column(
+                          children: [
+                            _profileContentController
+                                        .profileDataModel.value.data!.phone ==
+                                    ""
+                                ? const SizedBox()
+                                : Row(
+                                    children: [
+                                      SizedBox(
                                         height: 20.h,
                                         width: 20.w,
                                         child: SvgPicture.asset(
-                                            "assets/icons/email.svg")),
-                                    SizedBox(
-                                      width: 10.w,
-                                    ),
-                                    Text(
-                                      userDataModel.data!.email!.toString(),
-                                      style: isMobile(context)
-                                          ? AppThemeData.titleTextStyle_14
-                                          : AppThemeData.titleTextStyle_11Tab,
-                                    ),
-                                  ],
-                                ),
-                        ],
+                                          "assets/icons/phone_color.svg",
+                                        ),
+                                      ),
+                                      SizedBox(width: 10.w),
+                                      Text(
+                                        _profileContentController
+                                            .profileDataModel.value.data!.phone!
+                                            .toString(),
+                                        style: isMobile(context)
+                                            ? AppThemeData.titleTextStyle_14
+                                            : AppThemeData.titleTextStyle_11Tab,
+                                      ),
+                                    ],
+                                  ),
+                            SizedBox(
+                              height: _profileContentController
+                                          .profileDataModel.value.data!.phone ==
+                                      ""
+                                  ? 0.h
+                                  : 10.h,
+                            ),
+                            _profileContentController
+                                        .profileDataModel.value.data!.email ==
+                                    ""
+                                ? const SizedBox()
+                                : Row(
+                                    children: [
+                                      SizedBox(
+                                          height: 20.h,
+                                          width: 20.w,
+                                          child: SvgPicture.asset(
+                                              "assets/icons/email.svg")),
+                                      SizedBox(
+                                        width: 10.w,
+                                      ),
+                                      Text(
+                                        _profileContentController
+                                            .profileDataModel.value.data!.email!
+                                            .toString(),
+                                        style: isMobile(context)
+                                            ? AppThemeData.titleTextStyle_14
+                                            : AppThemeData.titleTextStyle_11Tab,
+                                      ),
+                                    ],
+                                  ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
+            //mobile And tab View
+            isMobile(context)
+                ? mobileView(userDataModel)
+                : tabView(userDataModel),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 18.h),
+              child: InkWell(
+                onTap: () {
+                  accountDeleteDialogue(userDataModel);
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(AppTags.deleteYourAccount.tr,
+                        style: AppThemeData.todayDealNewStyleTab
+                            .copyWith(fontSize: 12.sp))
+                  ],
                 ),
-          //mobile And tab View
-          isMobile(context)
-              ? mobileView(userDataModel)
-              : tabView(userDataModel),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 18.h),
-            child: InkWell(
-              onTap: () {
-                accountDeleteDialogue(userDataModel);
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(AppTags.deleteYourAccount.tr,
-                      style: AppThemeData.todayDealNewStyleTab
-                          .copyWith(fontSize: 12.sp))
-                ],
               ),
             ),
-          ),
-        ],
-      );
+          ],
+        );
+      });
   //Mobile view
   Widget mobileView(UserDataModel userDataModel) => Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -296,7 +319,7 @@ class _ProfileContentState extends State<ProfileContent> {
 
               InkWell(
                   onTap: () {
-                    Navigator.of(context).push(
+                    final result = Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => EditProfile(
                           userDataModel:
@@ -304,6 +327,9 @@ class _ProfileContentState extends State<ProfileContent> {
                         ),
                       ),
                     );
+                    if (result == 'updated') {
+                      setState(() {}); // Rebuild the current page
+                    }
                   },
                   child:
                       mobileViewTile("edit_profile", AppTags.editProfile.tr)),

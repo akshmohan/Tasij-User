@@ -21,7 +21,10 @@ class FavoriteProduct extends StatelessWidget {
     return favouriteData.data!.favouriteProducts.isEmpty
         ? Center(
             child: Text(AppTags.noFavProduct.tr,
-                style: isMobile(context)? AppThemeData.favoriteTextStyle_14:AppThemeData.favoriteTextStyle_14.copyWith(fontSize: 11.sp)),
+                style: isMobile(context)
+                    ? AppThemeData.favoriteTextStyle_14
+                    : AppThemeData.favoriteTextStyle_14
+                        .copyWith(fontSize: 11.sp)),
           )
         : Padding(
             padding: EdgeInsets.only(top: 20.h),
@@ -29,15 +32,15 @@ class FavoriteProduct extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: 15.w,
               ),
-              itemCount: favouriteData.data!.favouriteProducts.length,
-              gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: isMobile(context)? 2:3,
+              itemCount: favouriteData.data?.favouriteProducts.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: isMobile(context) ? 2 : 3,
                   childAspectRatio: .75,
-                  mainAxisSpacing: isMobile(context)? 15:25,
-                  crossAxisSpacing: isMobile(context)?15:25),
+                  mainAxisSpacing: isMobile(context) ? 15 : 25,
+                  crossAxisSpacing: isMobile(context) ? 15 : 25),
               itemBuilder: (context, index) {
                 return ShopProductCard(
-                  dataModel: favouriteData.data!.favouriteProducts,
+                  dataModel: favouriteData.data?.favouriteProducts,
                   index: index,
                 );
               },
