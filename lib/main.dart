@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:upgrader/upgrader.dart';
 import 'src/bindings/init_bindings.dart';
 import 'src/controllers/init_controller.dart';
 import 'src/_route/routes.dart';
@@ -32,27 +33,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      builder: (context, child) {
-        return GetMaterialApp(
-          navigatorObservers: <NavigatorObserver>[initController.observer],
-          initialBinding: InitBindings(),
-          locale: storage.languageCode != null
-              ? Locale(storage.languageCode!, storage.countryCode)
-              : const Locale('en', 'US'),
-          translations: AppTranslations(),
-          fallbackLocale: const Locale('en', 'US'),
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          initialRoute: Routes.splashScreen,
-          getPages: Routes.list,
-        );
-      },
+    return UpgradeAlert(
+      child: ScreenUtilInit(
+        designSize: const Size(375, 812),
+        builder: (context, child) {
+          return GetMaterialApp(
+            navigatorObservers: <NavigatorObserver>[initController.observer],
+            initialBinding: InitBindings(),
+            locale: storage.languageCode != null
+                ? Locale(storage.languageCode!, storage.countryCode)
+                : const Locale('en', 'US'),
+            translations: AppTranslations(),
+            fallbackLocale: const Locale('en', 'US'),
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            initialRoute: Routes.splashScreen,
+            getPages: Routes.list,
+          );
+        },
+      ),
     );
   }
 }
-
 //HEY
