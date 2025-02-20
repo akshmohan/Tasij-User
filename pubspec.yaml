@@ -68,6 +68,7 @@ dependencies:
 #  youtube_player_flutter: ^8.1.0
   chewie: ^1.5.0
   flutter_inappwebview: ^6.0.0
+  upgrader: ^6.5.0
 #  vimeo_video_player: ^0.0.4
 
 dev_dependencies:
