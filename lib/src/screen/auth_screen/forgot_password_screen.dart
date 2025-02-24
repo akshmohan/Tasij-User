@@ -11,9 +11,7 @@ class ForgetPasswordScreen extends StatelessWidget {
   ForgetPasswordScreen({Key? key}) : super(key: key);
   final emailController = TextEditingController();
   final otpController = TextEditingController();
-
-  final ForgotPasswordController forgotPassController = Get.put(ForgotPasswordController());
-
+final ForgotPasswordController forgotPassController = Get.put(ForgotPasswordController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -623,10 +623,10 @@ class Repository {
 
     var data = json.decode(response.body);
     if (response.statusCode == 200) {
-      showShortToast(data["message"]);
+      // showShortToast(data["message"]);
       return data["success"];
     } else {
-      showErrorToast(data['message']);
+      // showErrorToast(data['message']);
       return data['success'];
     }
   }

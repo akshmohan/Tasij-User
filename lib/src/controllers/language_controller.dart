@@ -17,16 +17,16 @@ class LanguageController extends GetxController {
     'bn_BD': {
       'languageCode': 'bn',
       'countryCode': 'BD',
-      'description': 'বাংলা'
+      'description': 'Bangla'
     },
     'ar_SA': {
       'languageCode': 'ar',
       'countryCode': 'SA',
-      'description': 'عربى'
+      'description': 'Arabic'
     }
   };
 
-  List<Languages> lang=LocalDataHelper().getConfigData().data!.languages!;
+  List<Languages> lang = LocalDataHelper().getConfigData().data!.languages!;
   void updateLocale(String? key) {
     final String languageCode = optionsLocales[key]['languageCode'];
     final String countryCode = optionsLocales[key]['countryCode'];
@@ -37,19 +37,18 @@ class LanguageController extends GetxController {
 
     //Language code check and save
     lang.asMap().forEach((index, value) {
-      if (lang[index].code!.contains(languageCode)){
+      if (lang[index].code!.contains(languageCode)) {
         LocalDataHelper().saveLanguageServer(languageCode);
         //print("=====EE====$languageCode");
       }
-    }
-    );
+    });
     // Update storage
     storage.write('languageCode', languageCode);
     storage.write('countryCode', countryCode);
   }
 
   List<Languages> getAppLanguageList() {
-     List<Languages> languageList = [];
+    List<Languages> languageList = [];
     optionsLocales.forEach((k, v) => languageList.add(Languages(
         code: optionsLocales[k]['languageCode'],
         name: optionsLocales[k]['description'])));

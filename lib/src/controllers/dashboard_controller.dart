@@ -26,6 +26,10 @@ class DashboardController extends GetxController {
       tabIndex.value = index;
     }
   }
+  
+  tabToFirst(){
+       tabIndex.value = 0;
+  }
 
   AddToCartListModel? addToCartListModel = AddToCartListModel();
   Future getAddToCartList() async {

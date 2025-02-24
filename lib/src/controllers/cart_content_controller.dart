@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 import '../models/add_to_cart_list_model.dart';
 import '../models/coupon_applied_list.dart';
@@ -31,11 +30,11 @@ class CartContentController extends GetxController {
     super.onInit();
   }
 
-
-  int incrementProduct(int productId){
-   int index =  _addToCartListModel.value.data!.carts!.indexWhere((element) =>element.productId==productId);
-   //printLog("index == $index");
-   return index;
+  int incrementProduct(int productId) {
+    int index = _addToCartListModel.value.data!.carts!
+        .indexWhere((element) => element.productId == productId);
+    //printLog("index == $index");
+    return index;
   }
 
   Future getCartList({bool isShowLoading = true}) async {
@@ -50,8 +49,8 @@ class CartContentController extends GetxController {
   Future addToCart(
       {required String productId,
       required String quantity,
-        String? variantsIds,
-       String? variantsNames}) async {
+      String? variantsIds,
+      String? variantsNames}) async {
     AnalyticsHelper().setAnalyticsData(
         screenName: "ProductDetailsScreen",
         eventTitle: "AddToCart",
@@ -85,7 +84,7 @@ class CartContentController extends GetxController {
   Future deleteAProductFromCart({required String productId}) async {
     await Repository().deleteCartProduct(productId: productId).then((value) {
       getCartList(isShowLoading: false);
-       AnalyticsHelper().setAnalyticsData(
+      AnalyticsHelper().setAnalyticsData(
           screenName: "ProductDetailsScreen",
           eventTitle: "DeleteFromCart",
           additionalData: {
