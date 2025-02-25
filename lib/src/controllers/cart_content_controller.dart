@@ -107,7 +107,7 @@ class CartContentController extends GetxController {
       getCartList(isShowLoading: false);
       _isCartUpdating(false);
       _updatingCartId.value = "";
-      getCartList();
+      // getCartList();
     });
     update();
     //return value;
