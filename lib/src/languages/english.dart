@@ -194,8 +194,8 @@ const Map<String, String> enUS = {
   "pleaseLoginFirst": "Please login first",
   "login": "Login",
   "selectAddress": "Select Address",
-  "pleaseSelectBullingOrPickupAddress":
-      "Please select bulling or pickup Address",
+  "pleaseSelectBillingOrPickupAddress":
+      "Please select billing or pickup address",
   "fiveDigitCodeSent": "5 digit code sent",
   "noCouponAvailable": "No Coupon Available",
   "noStoreFound": "No Store Found",

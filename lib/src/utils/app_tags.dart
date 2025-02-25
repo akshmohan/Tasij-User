@@ -278,8 +278,8 @@ class AppTags {
   static const String pleaseLoginFirst = "pleaseLoginFirst";
   static const String login = "login";
   static const String selectAddress = "selectAddress";
-  static const String pleaseSelectBullingOrPickupAddress =
-      "pleaseSelectBullingOrPickupAddress";
+  static const String pleaseSelectBillingOrPickupAddress =
+      "pleaseSelectBillingOrPickupAddress";
 
   // Checkout Screen
   static const String name = "name";

@@ -159,6 +159,7 @@ class CategoryScreen extends StatelessWidget {
                         padding: EdgeInsets.only(
                           left: 7.5.w,
                           right: 15.w,
+                          top: 25.h,
                         ),
                         //color: Colors.green,
                         child: Column(
@@ -335,7 +336,8 @@ class CategoryScreen extends StatelessWidget {
                       flex: 2,
                       child: Container(
                         height: size.height,
-                        padding: EdgeInsets.only(left: 7.5.w, right: 15.w),
+                        padding: EdgeInsets.only(
+                            left: 7.5.w, right: 15.w, top: 25.h),
                         //color: Colors.green,
                         child: Column(
                           children: [

@@ -19,10 +19,11 @@ class DashboardScreen extends StatelessWidget {
   final cartContentController = Get.put(CartContentController());
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(onWillPop: () {
-      homeController.tabToFirst();
-      return Future(() => false);
-    },
+    return WillPopScope(
+      onWillPop: () {
+        homeController.tabToFirst();
+        return Future(() => false);
+      },
       child: Obx(
         () => Scaffold(
           body: IndexedStack(
