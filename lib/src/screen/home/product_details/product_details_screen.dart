@@ -7,6 +7,7 @@ import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:yoori_ecommerce/src/screen/cart/cart_screen.dart';
 import '../../../_route/routes.dart';
 import '../../../controllers/cart_content_controller.dart';
 import '../../../controllers/color_selection_controller.dart';
@@ -59,7 +60,7 @@ class DetailsPage extends StatelessWidget {
     ));
   }
 
-  mobileAppbar() {
+  mobileAppbar(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
@@ -90,12 +91,14 @@ class DetailsPage extends StatelessWidget {
               child: Obx(
                 () => InkWell(
                   onTap: () {
-                    homeScreenController.changeTabIndex(2);
-                    Get.offAll(
-                      DashboardScreen(),
-                      transition: Transition.rightToLeftWithFade,
-                      duration: const Duration(milliseconds: 700),
-                    );
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => CartScreen()));
+                    // homeScreenController.changeTabIndex(2);
+                    // Get.offAll(
+                    //   DashboardScreen(),
+                    //   transition: Transition.rightToLeftWithFade,
+                    //   duration: const Duration(milliseconds: 700),
+                    // );
                     if (_favouriteController.token != null) {
                       if (detailsController.isFavorite.value !=
                           detailsController.isFavoriteLocal.value) {
@@ -308,7 +311,7 @@ class DetailsPage extends StatelessWidget {
   Widget _detailsPageUI(ProductDetailsModel detailsModel, context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: isMobile(context) ? mobileAppbar() : tabAppbar(),
+      appBar: isMobile(context) ? mobileAppbar(context) : tabAppbar(),
       body: SizedBox(
         height: size.height,
         width: size.width,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/screen/home/product_details/product_details_screen.dart';
 import '../../controllers/cart_content_controller.dart';
 import '../../controllers/currency_converter_controller.dart';
 import '../../utils/app_tags.dart';
@@ -49,7 +50,9 @@ class _CartScreenState extends State<CartScreen> {
         centerTitle: true,
         title: Text(
           AppTags.myCart.tr,
-          style: isMobile(context)? AppThemeData.headerTextStyle_16:AppThemeData.headerTextStyle_14,
+          style: isMobile(context)
+              ? AppThemeData.headerTextStyle_16
+              : AppThemeData.headerTextStyle_14,
         ),
       ),
       body: addToCartListModel.data!.carts!.isNotEmpty
@@ -72,7 +75,7 @@ class _CartScreenState extends State<CartScreen> {
                   ),
 
                   Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 15.h),
+                    padding: EdgeInsets.symmetric(horizontal: 15.h),
                     child: Column(
                       children: [
                         Container(
@@ -81,7 +84,8 @@ class _CartScreenState extends State<CartScreen> {
                             borderRadius: BorderRadius.circular(10.r),
                             boxShadow: [
                               BoxShadow(
-                                color: AppThemeData.boxShadowColor.withOpacity(0.1),
+                                color: AppThemeData.boxShadowColor
+                                    .withOpacity(0.1),
                                 spreadRadius: 0,
                                 blurRadius: 30,
                                 offset: const Offset(
@@ -96,9 +100,13 @@ class _CartScreenState extends State<CartScreen> {
                               onExpansionChanged: (bool expanded) {},
                               title: Text(
                                 AppTags.couponApply.tr,
-                                style: isMobile(context)?
-                                AppThemeData.buttonTextStyle_14Reg.copyWith(fontSize: 13.sp,fontFamily: "Poppins Medium"):
-                                AppThemeData.buttonTextStyleTab.copyWith(fontFamily: "Poppins Medium"),
+                                style: isMobile(context)
+                                    ? AppThemeData.buttonTextStyle_14Reg
+                                        .copyWith(
+                                            fontSize: 13.sp,
+                                            fontFamily: "Poppins Medium")
+                                    : AppThemeData.buttonTextStyleTab
+                                        .copyWith(fontFamily: "Poppins Medium"),
                               ),
                               children: [
                                 Column(
@@ -129,11 +137,13 @@ class _CartScreenState extends State<CartScreen> {
                                                 padding: EdgeInsets.only(
                                                     left: 10.w, right: 6.w),
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.all(
+                                                  borderRadius:
+                                                      BorderRadius.all(
                                                     Radius.circular(5.r),
                                                   ),
                                                   border: Border.all(
-                                                    color: AppThemeData.invoiceDividerColor,
+                                                    color: AppThemeData
+                                                        .invoiceDividerColor,
                                                     width: 1.w,
                                                   ),
                                                 ),
@@ -158,8 +168,12 @@ class _CartScreenState extends State<CartScreen> {
                                                                 .title
                                                                 .toString(),
                                                             style: TextStyle(
-                                                              color: Colors.black,
-                                                              fontSize: isMobile(context)? 12.sp:9.sp,
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: isMobile(
+                                                                      context)
+                                                                  ? 12.sp
+                                                                  : 9.sp,
                                                             ),
                                                           ),
                                                         ],
@@ -170,7 +184,11 @@ class _CartScreenState extends State<CartScreen> {
                                                             .data![index]
                                                             .discount
                                                             .toString(),
-                                                        style: isMobile(context)? AppThemeData.todayDealNewStyle:AppThemeData.todayDealNewStyleTab,
+                                                        style: isMobile(context)
+                                                            ? AppThemeData
+                                                                .todayDealNewStyle
+                                                            : AppThemeData
+                                                                .todayDealNewStyleTab,
                                                       ),
                                                     ],
                                                   ),
@@ -204,13 +222,17 @@ class _CartScreenState extends State<CartScreen> {
                                               minWidth: 0,
                                               minHeight: 0,
                                             ),
-                                            hintStyle: isMobile(context)?AppThemeData.dateTextStyle_12:AppThemeData.dateTextStyle_9Tab,
+                                            hintStyle: isMobile(context)
+                                                ? AppThemeData.dateTextStyle_12
+                                                : AppThemeData
+                                                    .dateTextStyle_9Tab,
                                             enabledBorder: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10.r),
                                               borderSide: const BorderSide(
                                                 width: 1,
-                                                color: AppThemeData.invoiceDividerColor,
+                                                color: AppThemeData
+                                                    .invoiceDividerColor,
                                               ),
                                             ),
                                             focusedBorder: OutlineInputBorder(
@@ -218,7 +240,8 @@ class _CartScreenState extends State<CartScreen> {
                                                   BorderRadius.circular(10.r),
                                               borderSide: const BorderSide(
                                                 width: 1,
-                                                color: AppThemeData.invoiceDividerColor,
+                                                color: AppThemeData
+                                                    .invoiceDividerColor,
                                               ),
                                             ),
                                             filled: true,
@@ -248,10 +271,12 @@ class _CartScreenState extends State<CartScreen> {
                                                               .text);
                                                 },
                                                 style: ElevatedButton.styleFrom(
-                                                  backgroundColor: const Color(0xFF333333),
+                                                  backgroundColor:
+                                                      const Color(0xFF333333),
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
-                                                        BorderRadius.circular(5.r),
+                                                        BorderRadius.circular(
+                                                            5.r),
                                                   ),
                                                 ),
                                                 child: _cartController
@@ -267,7 +292,10 @@ class _CartScreenState extends State<CartScreen> {
                                                     : Text(
                                                         AppTags.apply.tr,
                                                         style: TextStyle(
-                                                          fontSize: isMobile(context)? 12.sp:9.sp,
+                                                          fontSize:
+                                                              isMobile(context)
+                                                                  ? 12.sp
+                                                                  : 9.sp,
                                                           color: Colors.white,
                                                         ),
                                                       ),
@@ -297,7 +325,8 @@ class _CartScreenState extends State<CartScreen> {
                   //Calculate Card
 
                   Padding(
-                    padding: EdgeInsets.only(right: 15.w, left: 15.w, bottom: 15.h),
+                    padding:
+                        EdgeInsets.only(right: 15.w, left: 15.w, bottom: 15.h),
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -306,7 +335,8 @@ class _CartScreenState extends State<CartScreen> {
                           BoxShadow(
                             spreadRadius: 30,
                             blurRadius: 5,
-                            color: AppThemeData.boxShadowColor.withOpacity(0.01),
+                            color:
+                                AppThemeData.boxShadowColor.withOpacity(0.01),
                             offset: const Offset(0, 15),
                           )
                         ],
@@ -320,13 +350,17 @@ class _CartScreenState extends State<CartScreen> {
                               children: [
                                 Text(
                                   AppTags.subTotal.tr,
-                                  style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab,
+                                  style: isMobile(context)
+                                      ? AppThemeData.titleTextStyle_14
+                                      : AppThemeData.titleTextStyle_11Tab,
                                 ),
                                 Text(
                                   currencyConverterController.convertCurrency(
                                       addToCartListModel.data!.calculations!
                                           .formattedSubTotal),
-                                  style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab,
+                                  style: isMobile(context)
+                                      ? AppThemeData.titleTextStyle_14
+                                      : AppThemeData.titleTextStyle_11Tab,
                                 ),
                               ],
                             ),
@@ -335,14 +369,18 @@ class _CartScreenState extends State<CartScreen> {
                               children: [
                                 Text(
                                   AppTags.discount.tr,
-                                  style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab,
+                                  style: isMobile(context)
+                                      ? AppThemeData.titleTextStyle_14
+                                      : AppThemeData.titleTextStyle_11Tab,
                                 ),
                                 Text(
                                   currencyConverterController.convertCurrency(
                                       addToCartListModel
                                           .data!.calculations!.formattedDiscount
                                           .toString()),
-                                  style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab,
+                                  style: isMobile(context)
+                                      ? AppThemeData.titleTextStyle_14
+                                      : AppThemeData.titleTextStyle_11Tab,
                                 ),
                               ],
                             ),
@@ -350,26 +388,34 @@ class _CartScreenState extends State<CartScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(AppTags.deliveryCharge.tr,
-                                    style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab),
+                                    style: isMobile(context)
+                                        ? AppThemeData.titleTextStyle_14
+                                        : AppThemeData.titleTextStyle_11Tab),
                                 Text(
                                     currencyConverterController.convertCurrency(
                                         addToCartListModel.data!.calculations!
                                             .formattedShippingCost
                                             .toString()),
-                                    style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab),
+                                    style: isMobile(context)
+                                        ? AppThemeData.titleTextStyle_14
+                                        : AppThemeData.titleTextStyle_11Tab),
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(AppTags.tax.tr,
-                                    style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab),
+                                    style: isMobile(context)
+                                        ? AppThemeData.titleTextStyle_14
+                                        : AppThemeData.titleTextStyle_11Tab),
                                 Text(
                                     currencyConverterController.convertCurrency(
                                         addToCartListModel
                                             .data!.calculations!.formattedTax
                                             .toString()),
-                                    style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab),
+                                    style: isMobile(context)
+                                        ? AppThemeData.titleTextStyle_14
+                                        : AppThemeData.titleTextStyle_11Tab),
                               ],
                             ),
                             const Divider(),
@@ -377,13 +423,17 @@ class _CartScreenState extends State<CartScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(AppTags.total.tr,
-                                    style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab),
+                                    style: isMobile(context)
+                                        ? AppThemeData.titleTextStyle_14
+                                        : AppThemeData.titleTextStyle_11Tab),
                                 Text(
                                   currencyConverterController.convertCurrency(
                                       addToCartListModel
                                           .data!.calculations!.formattedTotal
                                           .toString()),
-                                  style: isMobile(context)? AppThemeData.titleTextStyle_14 : AppThemeData.titleTextStyle_11Tab,
+                                  style: isMobile(context)
+                                      ? AppThemeData.titleTextStyle_14
+                                      : AppThemeData.titleTextStyle_11Tab,
                                 ),
                               ],
                             ),
